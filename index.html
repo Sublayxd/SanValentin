@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mi Amor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos de tu página original */
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 100;
+            text-align: center;
+            margin: 20px;
+            pointer-events: auto;
+        }
+
+        .blink {
+            font-size: clamp(40px, 8vw, 60px);
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+            animation: blink 1.5s infinite alternate;
+        }
+        
+        @keyframes blink {
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0.7; transform: scale(0.98); }
+        }
+        
+        .fade-in {
+            font-size: clamp(20px, 4vw, 28px);
+            margin-top: 20px;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease-in;
+        }
+        
+        .button-container {
+            margin-top: 30px;
+        }
+        
+        button {
+            background-color: #ffffff;
+            color: #ff4081;
+            font-size: clamp(18px, 3vw, 24px);
+            border: none;
+            padding: 12px 32px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:hover {
+            background-color: #ff4081;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .floating-message {
+            position: absolute;
+            font-size: clamp(16px, 3vw, 22px);
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            animation: float 4s ease-out infinite;
+            pointer-events: none;
+            z-index: 200;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-20vh) scale(1.2); opacity: 0; }
+        }
+
+        /* Estilos de la segunda página (flores y corazones) */
+        .flowers {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart {
+            fill: #ff4081;
+            width: 32px;
+            height: 32px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .bubbles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            width: 40px;
+            height: 40px;
+            opacity: 0.5;
+            animation: rise 10s infinite ease-in;
+        }
+
+        @keyframes rise {
+            0% {
+                bottom: -100px;
+                transform: translateX(0) scale(0.4);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.9;
+            }
+            100% {
+                bottom: 100%;
+                transform: translateX(100px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        .bubble:nth-child(2n) {
+            animation-duration: 12s;
+            animation-delay: 1s;
+        }
+
+        .bubble:nth-child(3n) {
+            animation-duration: 15s;
+            animation-delay: 2s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Contenido de tu página original -->
+    <div class="content-wrapper">
+        <h1>
+            <span class="blink">TE</span> 
+            <span class="blink" style="animation-delay: 0.3s;">AMO</span> 
+            <span class="blink" style="animation-delay: 0.6s;">MUCHO</span> 
+            <span class="blink" style="animation-delay: 0.9s;">ALEJANDRA</span>
+        </h1>
+        
+        <div id="initial-content">
+            <p class="fade-in">Mi niña preciosa, ¿Quieres ser mi San Valentín?</p>
+            <div class="button-container">
+                <button onclick="showLoveMessage()">Sí 💖</button>
+            </div>
+        </div>
+        
+        <div id="love-message" class="hidden">
+            <p class="fade-in">Te amo mucho, eres lo más hermoso de mi vida y nunca me imagino una vida sin ti. Ojalá tenerte toda una eternidad, y siempre serás mi hermosa mujer. Te amo. 💖</p>
+        </div>
+    </div>
+
+    <!-- Elementos visuales de la segunda página (flores y corazones) -->
+    <div class="flowers">
+        <!-- Aquí puedes agregar las flores si lo deseas -->
+    </div>
+
+    <div class="bubbles">
+        <!-- Corazones flotantes -->
+        <div class="bubble"><svg class="heart" viewBox="0 0 32 32">
+            <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+        </svg></div>
+        <!-- Repetir bubble div 20 veces para más corazones -->
+    </div>
+    
+    <script>
+        function showLoveMessage() {
+            document.getElementById('initial-content').classList.add('hidden');
+            document.getElementById('love-message').classList.remove('hidden');
+            createFloatingMessages();
+        }
+        
+        function createFloatingMessages() {
+            const messages = [
+                "Te amo ❤️", 
+                "Eres la mejor 💫", 
+                "Siempre te amaré 💕", 
+                "Amo tus chistes 😊", 
+                "Me gusta estar a tu lado 🌹", 
+                "Me encanta todo de ti 💝"
+            ];
+            
+            setInterval(() => {
+                const msg = document.createElement("div");
+                msg.className = "floating-message";
+                msg.innerText = messages[Math.floor(Math.random() * messages.length)];
+                msg.style.left = `${Math.random() * 80 + 10}%`;
+                document.body.appendChild(msg);
+                setTimeout(() => msg.remove(), 4000);
+            }, 2000);
+
+            // Crear corazones flotantes
+            setInterval(() => {
+                const bubble = document.createElement("div");
+                bubble.className = "bubble";
+                bubble.innerHTML = `<svg class="heart" viewBox="0 0 32 32">
+                    <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+                </svg>`;
+                bubble.style.left = `${Math.random() * 100}%`;
+                document.querySelector('.bubbles').appendChild(bubble);
+                setTimeout(() => bubble.remove(), 10000);
+            }, 500);
+        }
+
+        // Iniciar con algunos corazones
+        for(let i = 0; i < 20; i++) {
+            const bubble = document.createElement("div");
+            bubble.className = "bubble";
+            bubble.style.left = `${Math.random() * 100}%`;
+            bubble.style.animationDelay = `${Math.random() * 10}s`;
+            bubble.innerHTML = `<svg class="heart" viewBox="0 0 32 32">
+                <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+            </svg>`;
+            document.querySelector('.bubbles').appendChild(bubble);
+        }
+    </script>
+</body>
+</html>
